@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+      AWS_REGION = 'us-east-1'
+}
 
 
 
@@ -22,7 +25,10 @@ pipeline {
                     [$class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-creds']
                 ]) {
-                    sh 'terraform plan -no-color'
+                    sh """
+                      terraform plan -var="region=${AWS_REGION}" -no-color
+                     """
+                      
                 }
             }
         }
