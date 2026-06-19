@@ -22,7 +22,7 @@ pipeline {
                     [$class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'aws-creds']
                 ]) {
-                    sh 'terraform plan'
+                    sh 'terraform plan -no-color'
                 }
             }
         }
